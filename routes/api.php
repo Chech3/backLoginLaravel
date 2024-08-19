@@ -19,4 +19,8 @@ Route::prefix('auth')->group(function() {
     route::post('login', [AuthController::class, 'login']);
 });
 
-Route::get('/user',[UserController::class, 'index'])->middleware();
+// Route::middleware(['jwt.verify'])->get('/user',[UserController::class, 'index']);
+
+Route::group(['middleware' => ['jwt.verify']], function() {
+   Route::get('/user', [UserController::class, 'index']);
+});

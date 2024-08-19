@@ -26,12 +26,12 @@ class JwtMiddleware
             } else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
                 return response()->json(['error' => 'Invalid token'], 401);
             } else {
-                return response()->json(['error' => 'Unauthorized'], 401);
+                return response()->json(['error' => 'authorization token not found '], 401);
             }
         }
 
         // Add the authenticated user to the request
-        $request->attributes->add(['user' => $user]);
+        // $request->attributes->add(['user' => $user]);
 
         // Continue the request pipeline
         return $next($request);
